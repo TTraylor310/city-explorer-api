@@ -20,10 +20,8 @@ app.get('/weather', getWeather);
 
 async function getWeather(request, response) {
   // const searchQuery = request.query.searchQuery;
-
   const url = `http://api.weatherbit.io/v2.0/current?key=${process.env.REACT_APP_WEATHERBIT_API_KEY}&lat=35.7796&lon=-122.5555`;
 
-  // const url = `http://api.weatherbit.io/v2.0/current?key=${process.env.REACT_APP_WEATHERBIT_API_KEY}&city=${searchQuery}`;
 
   try{
     const xweatherR = await axios.get(url);
