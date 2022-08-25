@@ -58,7 +58,7 @@ async function getMovies(request, response) {
   }
 }
 
-class MovieInfo {
+class MovieInfo{
   constructor (obj) {
     this.id = obj.id;
     this.title = obj.title;
