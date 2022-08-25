@@ -19,9 +19,10 @@ app.get('/', (request, response) => {
 app.get('/weather', getWeather);
 
 async function getWeather(request, response) {
+  let lat = request.query.lat;
+  let lon = request.query.lon;
   // const searchQuery = request.query.searchQuery;
-  const url = `http://api.weatherbit.io/v2.0/current?key=${process.env.REACT_APP_WEATHERBIT_API_KEY}&lat=35.7796&lon=-122.5555`;
-
+  const url = `http://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${process.env.REACT_APP_WEATHERBIT_API_KEY}`;
 
   try{
     const xweatherR = await axios.get(url);
@@ -32,6 +33,7 @@ async function getWeather(request, response) {
     response.status(500).send('server error99');
   }
 }
+
 
 class WeatherInfo{
   constructor (obj) {
