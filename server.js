@@ -34,7 +34,6 @@ async function getWeather(request, response) {
   }
 }
 
-
 class WeatherInfo{
   constructor (obj) {
     // this.city_name = obj.city_name;
@@ -44,6 +43,30 @@ class WeatherInfo{
     this.description = obj.weather.description;
   }
 }
+
+app.get('/movies',getMovies);
+
+async function getMovies(request, response) {
+  let city = request.query.city;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}&page=1&query=${city}`;
+  try{
+    const movieR = await axios.get(url);
+    const movieArr = movieR.data.results.map(val => new MovieInfo (val));
+    response.status(200).send(movieArr);
+  } catch (error) {
+    response.status(500).send('server erro22');
+  }
+}
+
+class MovieInfo {
+  constructor (obj) {
+    this.id = obj.id;
+    this.title = obj.title;
+    this.overview = obj.overview;
+    this.poster_path = obj.poster_path;
+  }
+}
+
 
 //must be at bottom
 app.get('*', (request, response) => {
