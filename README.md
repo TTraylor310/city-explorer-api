@@ -22,9 +22,11 @@ Also the website will return a few days worth of weather.
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
 * Lab06 - Jun and Daniel S.
-  * ![Picture](./public/img/lab06_sketch.png)
+  * ![Picture](./img/lab06_sketch.png)
 * Lab07 - Armen
-  * ![Picture](./public/img/lab07_sketch.png)
+  * ![Picture](./img/lab07_sketch.png)
+* Lab08 - Adrian
+  * ![Picture](./img/lab08_sketch.png)
 
 Name of feature: City Name, Long and Lat data
 Estimate of time needed to complete: 60 min

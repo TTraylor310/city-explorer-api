@@ -1,37 +1,46 @@
 'use strict';
 
-// const { response } = require('express');
 const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
-let data = require('./data/weather.json');
+const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
-app.use(cors());
 const PORT = process.env.PORT || 3002;
+app.use(cors());
+app.listen(PORT, ()=> console.log(`We are on: ${PORT}`));
 
+////////////////////////////////
 
 app.get('/', (request, response) => {
   response.status(200).send('Welcome');
 });
 
+app.get('/weather', getWeather);
 
-app.get('/weather', (request, response, next) => {
+async function getWeather(request, response) {
+  // const searchQuery = request.query.searchQuery;
+
+  const url = `http://api.weatherbit.io/v2.0/current?key=${process.env.REACT_APP_WEATHERBIT_API_KEY}&lat=35.7796&lon=-122.5555`;
+
+  // const url = `http://api.weatherbit.io/v2.0/current?key=${process.env.REACT_APP_WEATHERBIT_API_KEY}&city=${searchQuery}`;
+
   try{
-    let dataToGroom = data.find(value => value.city_name.toLowerCase() === request.query.city.toLowerCase());
-    let dataToSend = dataToGroom.data.map(val => {
-      return new Forecast(val);
-    });
-    response.status(200).send(dataToSend);
-  } catch (error){
-    next (error);
+    const xweatherR = await axios.get(url);
+    const xweatherRArray = xweatherR.data.data.map(val => new WeatherInfo(val));
+    response.status(200).send(xweatherRArray);
+  } catch (error) {
+    console.log('error message13', error);
+    response.status(500).send('server error99');
   }
-});
+}
 
-
-class Forecast {
+class WeatherInfo{
   constructor (obj) {
-    this.date = obj.valid_date;
+    // this.city_name = obj.city_name;
+    this.sunrise = obj.sunrise;
+    this.sunset = obj.sunset;
+    this.app_temp = obj.app_temp;
     this.description = obj.weather.description;
   }
 }
@@ -41,10 +50,6 @@ app.get('*', (request, response) => {
   response.status(404).send('Does Not Exist');
 });
 
-
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 });
-
-
-app.listen(PORT, ()=> console.log(`We are on: ${PORT}`));
