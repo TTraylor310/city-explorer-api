@@ -2,7 +2,9 @@
 
 const axios = require ('axios');
 
+
 // let cache = {};
+
 
 async function getWeather(request, response, next) {
   let lat = request.query.lat;
@@ -11,6 +13,7 @@ async function getWeather(request, response, next) {
   let url =`http://api.weatherbit.io/v2.0/current`;
 
   let params = {
+
     lat,
     lon,
     key: process.env.REACT_APP_WEATHERBIT_API_KEY,
@@ -23,11 +26,13 @@ async function getWeather(request, response, next) {
     console.log(xweatherR);
     const xweatherRArray = xweatherR.data.data.map(val => new WeatherInfo(val));
     console.log(xweatherRArray);
+
     response.status(200).send(xweatherRArray);
   } catch (error) {
     console.log('error message13', error);
     response.status(500).send('server error99');
   }
+
 
 }
 
