@@ -46,6 +46,12 @@ Start time: 1500
 Finish time: 2000
 Actual time needed to complete: 5 hours
 
+Name of feature: Modulaize Front and Back
+Estimate of time needed to complete: 3 hrs
+Start time: 1200
+Finish time: 1630
+Actual time needed to complete: 4.5 hr
+
 <!-- Name of feature: 
 Estimate of time needed to complete: 
 Start time: 
