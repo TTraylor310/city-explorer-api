@@ -8,6 +8,7 @@ async function getMovies(request, response, next) {
 
   let params = {
     query: city,
+
     // page: 1,
     api_key: process.env.REACT_APP_MOVIEDB_API_KEY,
   };

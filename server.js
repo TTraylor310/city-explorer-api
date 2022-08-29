@@ -22,6 +22,7 @@ app.get('/weather', getWeather);
 
 app.get('/movies',getMovies);
 
+
 //must be at bottom
 app.get('*', (request, response) => {
   response.status(404).send('Does Not Exist');
